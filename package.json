@@ -1,0 +1,31 @@
+{
+  "name": "humble-session",
+  "version": "0.0.0",
+  "description": "A hapi session plugin.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkochan/humble-session.git"
+  },
+  "keywords": [
+    "hapi",
+    "plugin",
+    "session"
+  ],
+  "author": {
+    "name": "Zoltan Kochan",
+    "email": "zoltan.kochan@gmail.com",
+    "url": "http://kochan.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zkochan/humble-session/issues"
+  },
+  "homepage": "https://github.com/zkochan/humble-session#readme",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  }
+}
