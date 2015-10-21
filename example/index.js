@@ -54,8 +54,9 @@ server.register([{
       pre: [sessionPre],
       handler: function(req, reply) {
         req.pre.session.msg = req.payload.msg;
-        reply.setSession(req.pre.session);
-        reply('session updated');
+        reply.setSession(req.pre.session, function() {
+          reply('session updated');
+        });
       }
     }
   });
