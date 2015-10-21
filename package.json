@@ -4,7 +4,7 @@
   "description": "A hapi session plugin.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,10 @@
   "homepage": "https://github.com/zkochan/humble-session#readme",
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "hapi": "^11.0.2",
+    "mocha": "^2.3.3"
   }
 }
