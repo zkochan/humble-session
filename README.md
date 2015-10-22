@@ -17,17 +17,39 @@ the session prerequisite.
 npm install --save humble-session
 ```
 
+
+## Options
+
+- `sessionStoreName` - the plugin name that will store the sessions.
+- `cookie` - the cookie name. Defaults to `'sid'`.
+- `password` - used for Iron cookie encoding.
+- `ttl` - sets the cookie expires time in milliseconds. Defaults to single browser session (ends
+  when browser closes).
+- `keepAlive` - if `true`, automatically sets the session cookie after validation to extend the
+  current session for a new `ttl` duration. Defaults to `false`.
+- `isSecure` - if `false`, the cookie is allowed to be transmitted over insecure connections which
+  exposes it to attacks. Defaults to `true`.
+- `isHttpOnly` - if `false`, the cookie will not include the 'HttpOnly' flag. Defaults to `true`.
+
+
 ## Usage
 
 Register the plugin:
 
 ```js
 var Hapi = require('hapi');
-var humbleSession = require('humble-session');
 
 var server = new Hapi.Server();
 
-server.register(humbleSession, function(err) {
+server.register([{
+    register: require('simple-session-store')
+  }, {
+    register: require('humble-session'),
+    options: {
+      sessionStoreName: 'simple-session-store',
+      password: 'secret'
+    }
+  }], function(err) {
   if (err) {
     console.log("Failed to register humble-session.");
   }
@@ -68,8 +90,12 @@ exports.register = function(server, options, next) {
       pre: [sessionPre],
       handler: function(req, reply) {
         req.pre.session.msg = req.payload.msg;
-        req.setSession(req.pre.session);
-        reply('session updated');
+        req.setSession(req.pre.session, function(err) {
+          if (err) {
+            return reply(err);
+          }
+          reply('session updated');
+        });
       }
     }
   });
