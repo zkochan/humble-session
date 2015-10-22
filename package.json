@@ -31,6 +31,7 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "hapi": "^11.0.2",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "simple-session-store": "^0.1.1"
   }
 }
