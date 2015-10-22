@@ -11,6 +11,7 @@
   "dependencies": {
     "hapi": "^11.0.0",
     "hapi-vtree": "^0.1.0",
+    "simple-session-store": "^0.1.1",
     "virtual-dom": "^2.1.1"
   }
 }
