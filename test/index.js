@@ -90,6 +90,7 @@ describe('humble-session', function() {
         config: {
           pre: [humbleSession.pre],
           handler: function(req, reply) {
+            expect(req.pre.session.expires).to.be.a('Date');
             expect(req.pre.session.value).to.eq('foo');
 
             req.getSession(function(err, session) {
@@ -116,7 +117,7 @@ describe('humble-session', function() {
           headers: {
             cookie: 'sid=' + cookie[1]
           }
-        });
+        }, function() {});
       });
     });
   });
