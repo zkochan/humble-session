@@ -16,7 +16,8 @@ server.register([{
     options: {
       password: 'some-pass',
       isSecure: false,
-      sessionStoreName: 'simple-session-store'
+      sessionStoreName: 'simple-session-store',
+      keepAlive: true
     }
   }, {
     register: hapiVtree
