@@ -1,27 +1,31 @@
-'use strict';
-var Hapi = require('hapi');
-var hapiVtree = require('hapi-vtree');
-var humbleSession = require('../lib');
-var sessionPre = require('../lib').pre;
-var h = require('virtual-dom/h');
+'use strict'
+const Hapi = require('hapi')
+const hapiVtree = require('hapi-vtree')
+const humbleSession = require('../lib')
+const sessionPre = require('../lib').pre
+const h = require('virtual-dom/h')
 
-var server = new Hapi.Server();
+let server = new Hapi.Server()
 
-server.connection({ port: '65444' });
+server.connection({ port: '65444' })
 
-server.register([{
-    register: require('simple-session-store')
-  }, {
+server.register([
+  {
+    register: require('simple-session-store'),
+  },
+  {
     register: humbleSession,
     options: {
       password: 'some-pass',
       isSecure: false,
       sessionStoreName: 'simple-session-store',
-      keepAlive: true
-    }
-  }, {
-    register: hapiVtree
-  }], function(err) {
+      keepAlive: true,
+    },
+  },
+  {
+    register: hapiVtree,
+  },
+], function(err) {
   if (err) {
     console.log('Failed to register humble-session.');
   }
@@ -32,20 +36,20 @@ server.register([{
     config: {
       pre: [sessionPre],
       handler: function(req, reply) {
-        var msg = req.pre.session.msg;
+        let msg = req.pre.session.msg
         reply.vtree(h('div', [
           h('div', [
             'Current message: ',
-            msg
+            msg,
           ]),
           h('form', { method: 'post' }, [
             h('input', { type: 'text', name: 'msg' }),
-            h('button', { type: 'submit' }, 'update session')
-          ])
-        ]));
-      }
-    }
-  });
+            h('button', { type: 'submit' }, 'update session'),
+          ]),
+        ]))
+      },
+    },
+  })
 
   server.route({
     method: 'POST',
@@ -53,15 +57,15 @@ server.register([{
     config: {
       pre: [sessionPre],
       handler: function(req, reply) {
-        req.pre.session.msg = req.payload.msg;
+        req.pre.session.msg = req.payload.msg
         reply.setSession(req.pre.session, function() {
-          reply('session updated');
-        });
-      }
-    }
-  });
+          reply('session updated')
+        })
+      },
+    },
+  })
 
   server.start(function() {
-    console.log('Server running at:', server.info.uri);
-  });
-});
+    console.log('Server running at:', server.info.uri)
+  })
+})
