@@ -35,6 +35,7 @@
     "simple-session-store": "^0.1.1"
   },
   "dependencies": {
+    "thenify": "^3.1.1",
     "uid-safe": "^2.0.0"
   }
 }
