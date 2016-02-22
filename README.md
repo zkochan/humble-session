@@ -107,4 +107,4 @@ exports.register = function(server, options, next) {
 
 ## License
 
-MIT
+MIT © [Zoltan Kochan](https://www.kochan.io)
