@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "chai": "^3.4.0",
-    "hapi": "^11.0.2",
-    "mocha": "^2.3.3",
+    "hapi": "^15.2.0",
+    "mocha": "^3.2.0",
     "simple-session-store": "^0.1.1"
   },
   "dependencies": {
